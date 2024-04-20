@@ -59,6 +59,6 @@ export const orderSlice = createSlice({
 
 export default orderSlice.reducer
 
-export const {completeOrder,createOrder,deleteOrder,hideCompletet,updateOrder} = orderSlice.actions
+export const {completeOrder,createOrder,deleteOrder,updateOrder} = orderSlice.actions
 
 
