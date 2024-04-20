@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { completeOrder ,deleteOrder, } from '../../store/redusers/orderSlice';
 import ModalCreate from '../nodalCreate copy/modalCreate';
 import ModalUpdate from '../modalUpdate/modalUpdate';
-import { setSelectedOrder } from '../../store/redusers/modalWind'; 
+import { setSelectedOrder } from '../../store/redusers/selectedOrderSlice'; 
 
 
 
@@ -32,7 +32,7 @@ function AdminTable() {
 
   const MyTable = withTableActions(Table);
   const columns = [
-  {id: 'Заявка'}, {id: 'Дата'}, {id: 'Фирма'},{id: 'ФИО'},{id: 'Коментарий'} ,{id: 'telephone'} ,{id: 'Статус'} ,{id: 'Ati'} 
+  {id: 'Заявка'}, {id: 'Дата'}, {id: 'Фирма'},{id: 'ФИО'},{id: 'Коментарий'} ,{id: 'Телефон'} ,{id: 'Статус'} ,{id: 'Ati'} 
   ];
   const data = createOrder();
 

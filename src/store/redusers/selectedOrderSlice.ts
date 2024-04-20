@@ -1,23 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    numberSlide:6,
     selectedOrder:1
 }
 
-export const orderSlice = createSlice({
+export const selectedOrderSlice = createSlice({
     name: 'order',
     initialState: initialState,
     reducers: {
         setSelectedOrder: (state,action) => {
             state.selectedOrder = action.payload
-            console.log('action.payload',action.payload)
             return state;
         }
     }
-});
+})
 
-export default orderSlice.reducer
+export default selectedOrderSlice.reducer
 
-export const {setSelectedOrder} = orderSlice.actions
+export const {setSelectedOrder} = selectedOrderSlice.actions
 

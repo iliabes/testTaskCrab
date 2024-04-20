@@ -10,9 +10,6 @@ export const orderSlice = createSlice({
     name: 'order',
     initialState: init,
     reducers: {
-        getVal: (state) => {
-            return state;
-        },
         completeOrder: (state,action) => {
             console.log('completeOrder');
             return state.map((order) => {
@@ -37,13 +34,6 @@ export const orderSlice = createSlice({
                 }
             }
         },
-        hideCompletet: (state)=>{
-            for (const order of state) {
-                if (order.status == 'Завершенно') {
-                    state.splice(state.indexOf(order), 1);
-                }
-            }
-        },
         updateOrder: (state,action)=>{
             return state.map((order) => {
                     if (order.id === action.payload.id) {
@@ -58,7 +48,6 @@ export const orderSlice = createSlice({
                     }
                 return order;
             });
-
             state.forEach((order) =>{
                 console.log(order.status)
             })
@@ -70,6 +59,6 @@ export const orderSlice = createSlice({
 
 export default orderSlice.reducer
 
-export const {getVal,completeOrder,createOrder,deleteOrder,hideCompletet,updateOrder} = orderSlice.actions
+export const {completeOrder,createOrder,deleteOrder,hideCompletet,updateOrder} = orderSlice.actions
 
 

@@ -1,7 +1,7 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import orderSliceReduser from './redusers/orderSlice'
 import numberOrderReduser from './redusers/numberOrder'
-import modalWind from './redusers/modalWind'
+import modalWind from './redusers/selectedOrderSlice'
 
 const rootReduser = combineReducers({
     orderSliceReduser,
