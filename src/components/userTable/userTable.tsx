@@ -52,7 +52,7 @@ function cargoTable() {
       <>
         <div className="table-center">
           <div className="cont-table">
-          <Switch defaultChecked={true} onChange={()=>{setHideComplet(!hideComplet)}} size="l" content="Скрыть выполенные" ></Switch>
+          <Switch defaultChecked={hideComplet} onChange={()=>{setHideComplet(!hideComplet)}} size="l" content="Скрыть выполенные" ></Switch>
           <MyTable  edgePadding={true} className={'user-table'} data={data} columns={columns}  getRowActions={getRowActions}/>
           </div>
         </div>

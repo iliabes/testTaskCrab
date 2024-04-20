@@ -1,6 +1,6 @@
 # Тестовое задание 
 
-Ссылка на  развернутый проект https://app.netlify.com/sites/meek-pudding-0aadee/overview
+Ссылка на  развернутый проект https://testcrab.netlify.app/
 
 ## Как запустить
 

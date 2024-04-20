@@ -12,7 +12,7 @@ interface IModalUpdate{
 }
 
 function ModalUpdate(props:IModalUpdate) {
-  console.log('modal update')
+  
   let [name, setName] = useState('')
   let [comment, setComment] = useState('')
   let [company, setCompany] = useState('')
@@ -22,7 +22,7 @@ function ModalUpdate(props:IModalUpdate) {
   let numberOrder = useAppSelector(state => state.modalWind.selectedOrder)
   let allOrders = useAppSelector(state => state.orderSliceReduser)
   let selectedOrder = getSelectedSlide(numberOrder)
-
+  console.log('modal update',status)
 
 
 
@@ -51,7 +51,7 @@ function ModalUpdate(props:IModalUpdate) {
       ferryman: name,
       tel: tel,
       comment: comment,
-      status: status,
+      status: status[0],
       ATICode: selectedOrder?.ATICode,
     }
 

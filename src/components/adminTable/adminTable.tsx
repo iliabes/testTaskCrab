@@ -55,6 +55,7 @@ function hideUpdateModal(){
 function createOrder(){
   let data = []
   for( let item of value){
+    console.log('item.status',item.status,item.status === 'Завершенно' )
     if(hideComplet && item.status === 'Завершенно'){continue};
     let elem= {
       Id: item.id,
@@ -99,7 +100,7 @@ function createOrder(){
           <div className="cont-table">
           <div className="cont-btn">
             <Button view="action" size="l" className='btn' onClick={()=>{openModalCreateFnc()}}>Создать</Button>
-            <Switch  defaultChecked={true} onChange={()=>{setHideComplet(!hideComplet)}} size="l" content="Скрыть выполенные" ></Switch>
+            <Switch  defaultChecked={hideComplet} onChange={()=>{setHideComplet(!hideComplet)}} size="l" content="Скрыть выполенные" ></Switch>
           </div>
           <ModalCreate  openModalFnc={openModalCreateFnc}   open={openModalCreate}/>
           <ModalUpdate  hide={hideUpdateModal}  open={openModalUpdate}/>
