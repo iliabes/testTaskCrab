@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import initialOrderState from '../initialData'
 import { IOrder } from '../../models/iUser';
+import Search from '../../components/search/search';
 
 
 const init:IOrder[] = initialOrderState
@@ -11,7 +12,7 @@ export const orderSlice = createSlice({
     initialState: init,
     reducers: {
         completeOrder: (state,action) => {
-            console.log('completeOrder');
+  
             return state.map((order) => {
                     if (order.id === action.payload) {
                         return {
@@ -43,17 +44,13 @@ export const orderSlice = createSlice({
                             ferryman:action.payload.ferryman,
                             tel:action.payload.tel,
                             comment: action.payload.comment,
-                            status: action.payload.status,
+                            status:action.payload.status,
                         };
                     }
                 return order;
             });
-            state.forEach((order) =>{
-                console.log(order.status)
-            })
-            console.log(state)
             return state
-        }
+        },
     },
 });
 

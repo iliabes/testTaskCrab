@@ -1,9 +1,9 @@
 import './adminTable.sass'
 import {Table, withTableActions, Button ,Switch} from '@gravity-ui/uikit';
-import React, {  useState  } from 'react';
+import React, {  useState,useMemo  } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { completeOrder ,deleteOrder, } from '../../store/redusers/orderSlice';
-import ModalCreate from '../nodalCreate copy/modalCreate';
+import ModalCreate from '../modalCreate/modalCreate';
 import ModalUpdate from '../modalUpdate/modalUpdate';
 import { setSelectedOrder } from '../../store/redusers/selectedOrderSlice'; 
 
@@ -34,28 +34,26 @@ function AdminTable() {
   const columns = [
   {id: 'Заявка'}, {id: 'Дата'}, {id: 'Фирма'},{id: 'ФИО'},{id: 'Коментарий'} ,{id: 'Телефон'} ,{id: 'Статус'} ,{id: 'Ati'} 
   ];
-  const data = createOrder();
 
 
-function openModalCreateFnc(){
+const openModalCreateFnc = ()=>{
   setOpenModalCreate(!openModalCreate)
 }
 
-
-function openModalUpdateFnc(id:IOrder){
+const openModalUpdateFnc = (id:IOrder) =>{
   dispatch(setSelectedOrder(id))
   setOpenModalUpdate(!openModalUpdate)
 }
 
-function hideUpdateModal(){
+const hideUpdateModal = ()=>{
   setOpenModalUpdate(false)
 }
 
-
-function createOrder(){
+  
+const dataTable = useMemo(()=>{
   let data = []
   for( let item of value){
-    console.log('item.status',item.status,item.status === 'Завершенно' )
+    console.log(item.status, item.status === 'Завершенно')
     if(hideComplet && item.status === 'Завершенно'){continue};
     let elem= {
       Id: item.id,
@@ -71,7 +69,9 @@ function createOrder(){
     data.push(elem)
   }
   return data
-}
+},[value,hideComplet])
+
+
 
 
 
@@ -104,7 +104,7 @@ function createOrder(){
           </div>
           <ModalCreate  openModalFnc={openModalCreateFnc}   open={openModalCreate}/>
           <ModalUpdate  hide={hideUpdateModal}  open={openModalUpdate}/>
-          <MyTable stickyHorizontalScrollBreakpoint={400} stickyHorizontalScroll={false}  className={'admin-table'} getRowActions={getRowActions} edgePadding={true}  data={data} columns={columns}  />
+          <MyTable stickyHorizontalScrollBreakpoint={400} stickyHorizontalScroll={false}  className={'admin-table'} getRowActions={getRowActions} edgePadding={true}  data={dataTable} columns={columns}  />
         </div>
         </div>
       </>

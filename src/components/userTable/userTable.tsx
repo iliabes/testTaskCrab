@@ -1,8 +1,9 @@
 import './userTable.sass'
 import {Table, withTableActions, Switch} from '@gravity-ui/uikit';
-import React, {useState} from 'react';
+import React, {useState,useCallback, useMemo} from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { completeOrder} from '../../store/redusers/orderSlice';
+import Search from '../search/search';
 
 
   
@@ -11,14 +12,19 @@ import { completeOrder} from '../../store/redusers/orderSlice';
 
 function cargoTable() {
   let [hideComplet, setHideComplet] = useState(false)
+  let [searchVal, setSearchVal] = useState('')
   let value = useAppSelector(state => state.orderSliceReduser)
-  const data = createOrder();
   const dispatch = useAppDispatch()
 
-  function createOrder(){
+
+  
+
+  
+  const dataTable = useMemo(()=>{
     let data = []
     for( let item of value){
       if(hideComplet && item.status === 'Завершенно'){continue};
+      if(searchVal && item.ferryman.toLowerCase().indexOf(searchVal.toLowerCase())< 0) {continue};
       let elem= {
         Id: item.id,
         Заявка: item.id,
@@ -33,9 +39,15 @@ function cargoTable() {
       data.push(elem)
     }
     return data
-  }
-  
-  
+  },[value,hideComplet,searchVal])
+
+
+  const changeSearchValue =  useCallback((val:string)=>{
+    setSearchVal(val)
+  },[searchVal])
+    
+
+
   //таблица
   const MyTable = withTableActions(Table);
   const columns = [{id: 'Заявка'}, {id: 'Дата'}, {id: 'Фирма'},{id: 'ФИО'},{id: 'Телефон'} ,{id: 'Коментарий'}  ,{id: 'Статус'} ,{id: 'Ati'} ];
@@ -52,8 +64,9 @@ function cargoTable() {
       <>
         <div className="table-center">
           <div className="cont-table">
+          <Search changeSearchValue={changeSearchValue}  searchVal={searchVal}/>
           <Switch defaultChecked={hideComplet} onChange={()=>{setHideComplet(!hideComplet)}} size="l" content="Скрыть выполенные" ></Switch>
-          <MyTable  edgePadding={true} className={'user-table'} data={data} columns={columns}  getRowActions={getRowActions}/>
+          <MyTable  edgePadding={true} className={'user-table'} data={dataTable} columns={columns}  getRowActions={getRowActions}/>
           </div>
         </div>
       </>

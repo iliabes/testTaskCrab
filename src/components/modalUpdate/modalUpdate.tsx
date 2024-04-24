@@ -22,7 +22,6 @@ function ModalUpdate(props:IModalUpdate) {
   let numberOrder = useAppSelector(state => state.modalWind.selectedOrder)
   let allOrders = useAppSelector(state => state.orderSliceReduser)
   let selectedOrder = getSelectedSlide(numberOrder)
-  console.log('modal update',status)
 
 
 
@@ -43,7 +42,7 @@ function ModalUpdate(props:IModalUpdate) {
     }
   }
 
-  function updOrder(){
+  const updOrder = ()=>{
     let order= {
       id: selectedOrder?.id,
       date: selectedOrder?.date,
@@ -51,7 +50,7 @@ function ModalUpdate(props:IModalUpdate) {
       ferryman: name,
       tel: tel,
       comment: comment,
-      status: status[0],
+      status:status,
       ATICode: selectedOrder?.ATICode,
     }
 
@@ -75,12 +74,12 @@ function ModalUpdate(props:IModalUpdate) {
           <Label className='Form-label' theme="clear" size="m">Комментарий</Label>
           <TextInput placeholder='Комментарий' value={comment} onChange={el => setComment(el.target.value)} size="l" />
           <Label className='Form-label' theme="clear" size="s">Статус</Label>
-          <Select defaultValue={['В работе']} onUpdate={(e:any)=>{setStatus(e)}}  size="xl" multiple={false}>
-            <Select.Option value="В работе">В работе</Select.Option>
+          <Select defaultValue={['В󠀠󠀠⠀работе']} onUpdate={(e:any)=>{setStatus(e.join())}}  size="xl" multiple={false}>
+            <Select.Option value="В⠀работе">В работе</Select.Option>
             <Select.Option value="Завершенно">Завершенно</Select.Option>
           </Select>
           <Button view="action" size="l"  onClick={()=>{updOrder()}} >Редактировать</Button>
-  
+          <Button className='form-cancel' view="outlined" size="xs"  onClick={()=>{props.hide()}} >✖</Button>
         </form>
         </div>
         </Modal>
