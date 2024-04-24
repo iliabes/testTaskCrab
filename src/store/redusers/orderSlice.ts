@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import initialOrderState from '../initialData'
 import { IOrder } from '../../models/iUser';
-import Search from '../../components/search/search';
+
 
 
 const init:IOrder[] = initialOrderState
